@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+        <Appenders>
+                <Console name="ConsoleBlue" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %blue{%msg%n}" />
+                </Console>
+                <Console name="ConsoleCyan" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %cyan{%msg%n}" />
+                </Console>
+                <Console name="ConsoleMagenta" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %magenta{%msg%n}" />
+                </Console>
+                <Console name="ConsoleRed" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %red{%msg%n}" />
+                </Console>
+                <Console name="ConsoleWhite" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %white{%msg%n}" />
+                </Console>
+                <Console name="ConsoleYellow" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %yellow{%msg%n}" />
+                </Console>
+        </Appenders>
+
+        <Loggers>
+                <Logger name="com.hazelcast" level="error" additivity="false">
+                        <AppenderRef ref="ConsoleBlue" />
+                </Logger>
+                <Logger name="com.hazelcast.client.spi.impl" level="info" additivity="false">
+                        <AppenderRef ref="ConsoleBlue" />
+                </Logger>
+                <Logger name="com.hazelcast.core" level="info" additivity="false">
+                        <AppenderRef ref="ConsoleBlue" />
+                </Logger>
+                <Logger name="com.hazelcast.internal.cluster" level="info" additivity="false">
+                        <AppenderRef ref="ConsoleBlue" />
+                </Logger>
+                
+                <Logger name="com.hazelcast.jet" level="info" additivity="false">
+                        <AppenderRef ref="ConsoleYellow" />
+                </Logger>
+                
+				<!--  ======== -->
+                <!--  My Stuff -->
+				<!--  ======== -->
+                <Logger name="neil.demo" level="debug" additivity="false">
+                        <AppenderRef ref="ConsoleCyan" />
+                </Logger>
+                <Logger name="neil.demo.zappa.Application" level="error" additivity="false">
+                        <AppenderRef ref="ConsoleCyan" />
+                </Logger>
+				<!--  ======== -->
+                <!--  My Stuff -->
+				<!--  ======== -->
+
+                <Logger name="org.springframework" level="error"
+                        additivity="false">
+                        <AppenderRef ref="ConsoleWhite" />
+                </Logger>
+                <Logger name="org.springframework.boot.web.embedded.tomcat.TomcatWebServer"
+                        level="info" additivity="false">
+                        <AppenderRef ref="ConsoleMagenta" />
+                </Logger>
+
+                <Root level="error">
+                        <AppenderRef ref="ConsoleRed" />
+                </Root>
+        </Loggers>
+</Configuration>
