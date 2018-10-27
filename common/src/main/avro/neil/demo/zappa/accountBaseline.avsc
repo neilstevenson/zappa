@@ -1,0 +1,9 @@
+{"namespace": "neil.demo.zappa",
+ "type": "record",
+ "name": "AccountBaseline",
+ "fields": [
+     {"name": "when", "type": "string"},
+     {"name": "owner", "type": "string"},
+     {"name": "balance", "type": "double"}
+ ]
+}

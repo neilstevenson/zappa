@@ -1,0 +1,65 @@
+:root { 
+	--hazelcast-blue: #012168;
+	--hazelcast-blue-dark: #0b2a35;
+	--hazelcast-blue-light: #2e7de1;
+	--hazelcast-orange: #ff5f00;
+}
+
+body {
+	background: var(--hazelcast-orange);
+	color: var(--hazelcast-blue-dark);
+}
+
+h1, h2, h3 { color: silver; }
+
+.headerfooter {
+	text-align: center;
+	color: var(--hazelcast-blue-dark);
+	font-family: "Courier New", Courier, monospace;
+	font-size: 80%;
+}
+
+.mainpane {
+	border-size: 5px;
+	border-style: solid;
+	border-color: var(--hazelcast-blue-dark);
+	padding: 5px 5px 5px 5px;
+}
+
+/* mySubmit -- HTML button */
+.mySubmit {
+	background: var(--hazelcast-blue-light);
+	border-radius: 4px;
+	color: white;
+	height: 25px;
+	opacity: 1.0;
+}
+.mySubmit:hover {
+	background: var(--hazelcast-blue);
+	opacity: 0.75;
+}
+.mySubmit:active {
+	background: var(--hazelcast-blue-dark);
+	box-shadow: 0 5px silver;
+	transform: translateY(4px);
+}
+
+/* myData -- HTML table */
+.myData {
+	border: 1px solid var(--hazelcast-blue);
+	border-collapse: collapse;
+}
+.myData th {
+	background-color: var(--hazelcast-blue-light);
+	color: white;
+	border-bottom: 1px solid navy;
+	border-right: 1px solid navy;
+	border-left: 1px solid navy;
+}
+.myData td {
+	background-color: white;
+	color: var(--hazelcast-blue-dark);
+	border-bottom: 1px solid navy;
+	border-right: 1px solid navy;
+	border-left: 1px solid navy;
+}

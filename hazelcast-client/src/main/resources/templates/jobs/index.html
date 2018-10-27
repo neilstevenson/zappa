@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>Jet Jobs</h1>
+
+		<table class="myData">
+			<tr>
+				<th th:each="column : ${columns}" th:text="${column}" />
+			</tr>
+
+			<tr th:each="datum : ${data}">
+				<td th:text="${datum.key}">?</td>
+				<td th:text="${datum.value.get('Id')}">
+				<td th:text="${datum.value.get('Submission Time')}">
+				<td th:text="${datum.value.get('Start Params')}">
+				<td th:text="${datum.value.get('Status')}">
+				<td th:if="${datum.value.get('Action') != null}">
+					<div th:if="${datum.value.get('Action') == 'Start' || datum.value.get('Action') == 'Stop'}">
+	          			<form th:action="@{/jobs/submit}">
+    	            		<input type="hidden" name="j_noun" th:value="${datum.key}"/>
+        	        		<input type="hidden" name="j_verb" th:value="${datum.value.get('Action')}"/>
+            	        	<input class="mySubmit" type="submit" th:value="${datum.value.get('Action')}"/>
+          				</form>
+					</div>
+					<div th:unless="${datum.value.get('Action') == 'Start' || datum.value.get('Action') == 'Stop'}">
+						<span th:text="${datum.value.get('Action')}">?</span>
+					</div>
+        		</td>
+			</tr>
+		</table>
+
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>

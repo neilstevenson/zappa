@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>Debug</h1>
+
+		<hr />
+		<h3 th:text="'Page Render Time : ' + ${#dates.format(#dates.createNow(),'HH:mm:ss')}">?</h3>
+		
+		<hr />
+		<h2>Connection Information</h2>
+		<table class="myData">
+			<tr>
+				<th th:each="column : ${columns}" th:text="${column}" />
+			</tr>
+
+			<tr th:each="datum : ${data}">
+				<td th:each="item : ${datum}" th:text="${item}" />
+			</tr>
+		</table>
+
+		<hr />
+		<h2>Session Information</h2>
+
+		<h3 th:if="${sessionCount} > 0"
+			th:text="'Total Sessions : ' + ${sessionCount}">?</h3>
+		
+		<table class="myData">
+			<tr>
+				<th colspan="3" th:text="'This Session Id : ' + ${#httpSession.id}">?</th>
+			</tr>
+			<tr>
+				<td>Creation Time</td>
+				<td th:text="${#httpSession.creationTime}">?</td>
+				<td th:text="${'(' + #dates.format(new java.util.Date(#httpSession.creationTime)) + ')'}">?</td>
+			</tr>
+			<tr>
+				<td>Last Accessed Time</td>
+				<td th:text="${#httpSession.lastAccessedTime}">?</td>
+				<td th:text="${'(' + #dates.format(new java.util.Date(#httpSession.lastAccessedTime)) + ')'}">?</td>
+			</tr>
+			<tr>
+				<td>User Agent</td>
+				<td colspan="2" th:text="${#httpSession.getAttribute('User-Agent')}">?</td>
+			</tr>
+		</table>
+
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>

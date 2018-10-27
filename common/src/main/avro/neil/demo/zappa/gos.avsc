@@ -1,0 +1,9 @@
+{"namespace": "neil.demo.zappa",
+ "type": "record",
+ "name": "Gps",
+ "fields": [
+     {"name": "timestamp", "type": "long"},
+     {"name": "latitude", "type": "double"},
+     {"name": "longitude", "type": "double"}
+ ]
+}

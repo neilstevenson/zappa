@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>Jet Jobs</h1>
+
+		<div th:if="${j_noun == null}">
+		  <h2>j_noun is null</h2>
+		</div>
+		<div th:if="${j_params == null}">
+		  <h2>j_params is null</h2>
+		</div>
+
+		<div th:if="${j_noun != null && j_params != null}">
+
+			<hr/>
+            <h2 th:text="'Job Request : ' + ${j_noun}">?</h2>
+            <hr/>
+			<table class="myData">
+				<tr><th>Params</th></tr>
+				<tr th:each="datum : ${j_params}">
+                	<td th:text="${datum}"/>
+                </tr>
+			</table>
+			
+			<hr/>
+			<form name="select" th:action="@{/jobs/index}">
+            	<input class="mySubmit" type="submit" value="Jobs"/>
+            </form>
+			
+		</div>
+
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>

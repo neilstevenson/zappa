@@ -1,0 +1,10 @@
+{"namespace": "neil.demo.zappa",
+ "type": "record",
+ "name": "AccountTransaction",
+ "fields": [
+     {"name": "when", "type": "string"},
+     {"name": "description", "type": "string"},
+     {"name": "amount", "type": "double"},
+     {"name": "debit", "type": "boolean"}
+ ]
+}
