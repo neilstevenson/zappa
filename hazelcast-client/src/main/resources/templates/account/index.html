@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>Account</h1>
+
+		<div th:if="${data.isEmpty()}">
+     		<h2 style="color: teal;">No accounts loaded</h2>
+		</div>
+
+		<table th:unless="${data.isEmpty()}" class="myData">
+			<tr>
+				<th th:each="column : ${columns}" th:text="${column}" />
+				<th>:</th>
+				<th>Transactions</th>
+			</tr>
+
+			<tr th:each="datum : ${data}">
+				<td th:each="item : ${datum}" th:text="${item}" />
+				<td>&nbsp;</td>
+				<td align="center">
+					<form th:action="@{/account/index2}">
+    	            		<input type="hidden" name="j_account" th:value="${datum.get(0)}"/>
+            	        	<input class="mySubmit" type="submit" th:value="View"/>
+          			</form>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>

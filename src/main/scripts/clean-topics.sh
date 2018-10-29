@@ -9,7 +9,7 @@ doIt() {
  echo RC=${RC}
 }
 
-TMPFILE=/tmp/${0}.$$
+TMPFILE=/tmp/`basename ${0}`.$$
 
 doIt ./stop-kafka.sh > $TMPFILE
 cat $TMPFILE

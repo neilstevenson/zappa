@@ -1,5 +1,7 @@
 package neil.demo.zappa;
 
+import java.util.Currency;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +36,12 @@ public class ApplicationWebConfig {
         return new WebFilter(properties);
 	}
 	
+	/**
+	 * <p>For displaying on the account pages
+	 * </p>
+	 */
+    @Bean
+    public String currencySymbol() {
+        return Currency.getInstance(Locale.getDefault()).getSymbol();
+    }
 }

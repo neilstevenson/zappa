@@ -55,6 +55,7 @@ h1, h2, h3 { color: silver; }
 	border-bottom: 1px solid navy;
 	border-right: 1px solid navy;
 	border-left: 1px solid navy;
+	padding: 2px;
 }
 .myData td {
 	background-color: white;
@@ -62,4 +63,5 @@ h1, h2, h3 { color: silver; }
 	border-bottom: 1px solid navy;
 	border-right: 1px solid navy;
 	border-left: 1px solid navy;
+	padding: 2px;
 }

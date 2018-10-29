@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,6 +73,9 @@ public class WriterAccount1 implements CommandLineRunner {
 					int partition = key.hashCode() % MyConstants.KAFKA_PARTITION_COUNT;
 					AccountTransaction transaction = values.get(valIndex);
 					List<AccountTransaction> accountTransactionList = Collections.singletonList(transaction);
+
+					// Simulate delay
+					TimeUnit.SECONDS.sleep(1);
 
 					MyUtils.writeKafka(partition, key, accountTransactionList, this.kafkaAccountProducerTemplate);
 				}
