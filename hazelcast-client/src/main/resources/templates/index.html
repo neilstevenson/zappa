@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+        <head th:replace="fragments :: head"/>
+
+        <body>
+                <div th:include="fragments :: header">?</div>
+        
+                <div class="mainpane">
+
+						<!--/* Index page */-->
+
+                        <h1>Menu</h1>
+
+                        <hr/>
+                        <h2 th:text="'Session Id : ' + ${#httpSession.id}" style="color: var(--hazelcast-blue-light);">?</h2>
+
+                        <hr/>
+                        <h2>Account</h2>
+            			<form name="select" th:action="@{/account/index}">
+    		            	<input class="mySubmit" type="submit" value="Accounts"/>
+	                    </form>
+                        
+                        <hr/>
+                        <h3>Debug</h3>
+            			<form name="select" th:action="@{/debug/index}">
+    		            	<input class="mySubmit" type="submit" value="Debug"/>
+	                    </form>
+
+                        <hr/>
+                        <h3>FX</h3>
+                        <table style="border-style:ridge;">
+                                <tr>
+                                        <td>
+                                                <form name="select" th:action="@{/fx/index}">
+                                                        <input class="mySubmit" type="submit" value="Alerts"/>
+                                                </form>
+                                        </td>
+                                        <td>
+                                                <form name="select" th:action="@{/fx/index2}">
+                                                        <input class="mySubmit" type="submit" value="Prices"/>
+                                                </form>
+                                        </td>
+                                </tr>
+                        </table>
+ 
+                        <hr/>
+                        <h3>Hamlet</h3>
+                        <table style="border-style:ridge;">
+                                <tr>
+                                        <td>
+                                                <form name="select" th:action="@{/hamlet/index}">
+                                                        <input class="mySubmit" type="submit" value="Word Count input"/>
+                                                </form>
+                                        </td>
+                                        <td>
+                                                <form name="select" th:action="@{/hamlet/index2}">
+                                                        <input class="mySubmit" type="submit" value="Word Count output"/>
+                                                </form>
+                                        </td>
+                                </tr>
+                        </table>
+                        
+                        <hr/>
+                        <h3>Jobs</h3>
+                        <table style="border-style:ridge;">
+                                <tr>
+                                        <td>
+                                                <form name="select" th:action="@{/jobs/index}">
+                                                        <input class="mySubmit" type="submit" value="Jobs"/>
+                                                </form>
+                                        </td>
+                                </tr>
+                        </table>
+
+				</div>
+
+                <div th:include="fragments :: footer">?</div>
+        </body>
+        
+</html>

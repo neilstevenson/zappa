@@ -14,6 +14,12 @@
                         <PatternLayout
                                 pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %magenta{%msg%n}" />
                 </Console>
+                <Console name="ConsoleMagentaBlink" target="SYSTEM_OUT">
+	                	<RegexFilter regex=".* Starting .*|.* Setting .*|.* Copyright .*" 
+	                		onMatch="DENY" onMismatch="ACCEPT"/>
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %style{%msg%n}{blink,magenta}" />
+                </Console>
                 <Console name="ConsoleRed" target="SYSTEM_OUT">
                         <PatternLayout
                                 pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %red{%msg%n}" />
@@ -23,6 +29,12 @@
                                 pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %white{%msg%n}" />
                 </Console>
                 <Console name="ConsoleYellow" target="SYSTEM_OUT">
+                        <PatternLayout
+                                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %yellow{%msg%n}" />
+                </Console>
+                <Console name="ConsoleYellow2" target="SYSTEM_OUT">
+	                	<RegexFilter regex=".* Starting .*|.* Setting .*|.* Copyright .*" 
+	                		onMatch="ACCEPT" onMismatch="DENY"/>
                         <PatternLayout
                                 pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level %logger{36}} - %yellow{%msg%n}" />
                 </Console>
@@ -44,6 +56,10 @@
                 
                 <Logger name="com.hazelcast.jet" level="info" additivity="false">
                         <AppenderRef ref="ConsoleYellow" />
+                </Logger>
+                <Logger name="com.hazelcast.jet.impl.JetService" level="info" additivity="false">
+                        <AppenderRef ref="ConsoleMagentaBlink" />
+                        <AppenderRef ref="ConsoleYellow2" />
                 </Logger>
                 
 				<!--  ======== -->

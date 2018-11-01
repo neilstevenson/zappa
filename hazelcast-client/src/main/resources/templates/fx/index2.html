@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>BTC/USD Prices</h1>
+
+			<div th:if="${data.isEmpty()}">
+     	       <h2 style="color: teal;">No results yet</h2>
+			</div>
+
+			<div th:unless="${data.isEmpty()}">
+
+				<table class="myData">
+					<tr>
+						<th th:each="column : ${columns}" th:text="${column}" />
+					</tr>
+					<tr th:each="datum : ${data}">
+						<td th:each="item : ${datum}" th:text="${item}" />
+					</tr>
+				</table>
+
+			</div>
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>
