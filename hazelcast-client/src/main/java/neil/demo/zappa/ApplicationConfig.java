@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.XmlClientConfigBuilder;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
 import com.hazelcast.jet.Jet;
 import com.hazelcast.jet.JetInstance;
 
@@ -36,7 +37,13 @@ public class ApplicationConfig {
 
 	@Bean
 	public HazelcastInstance hazelcastInstance(JetInstance jetInstance) {
-		return jetInstance.getHazelcastInstance();
+		HazelcastInstance hazelcastInstance = jetInstance.getHazelcastInstance();
+		
+        // React to map changes
+        IMap<?, ?> accountMap = hazelcastInstance.getMap(MyConstants.IMAP_NAME_ACCOUNT);
+        accountMap.addEntryListener(new MyLoggingListener(), true);
+
+		return hazelcastInstance;
 	}
 
 }
