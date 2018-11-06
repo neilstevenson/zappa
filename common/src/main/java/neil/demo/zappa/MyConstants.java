@@ -31,6 +31,8 @@ public class MyConstants {
 	public static final String IMAP_NAME_COMMAND = "command";
 	public static final String IMAP_NAME_HAMLET = "hamlet";
 	public static final String IMAP_NAME_JSESSIONID = "jsessionid";
+	public static final String IMAP_NAME_POSITION = "position";
+	public static final String IMAP_NAME_SPEED = "speed";
 	public static final String IMAP_NAME_WORDS = "words";
 	public static final String[] IMAP_NAMES = {
 			IMAP_NAME_ACCOUNT,
@@ -39,6 +41,8 @@ public class MyConstants {
 			IMAP_NAME_COMMAND,
 			IMAP_NAME_HAMLET,
 			IMAP_NAME_JSESSIONID,
+			IMAP_NAME_POSITION,
+			IMAP_NAME_SPEED,
 			IMAP_NAME_WORDS
 	};
 
@@ -51,10 +55,14 @@ public class MyConstants {
             ITOPIC_NAME_ALERT };
 	
 	public static final String JOB_NAME_ACCOUNT = "Account Materialisation";
+	public static final String JOB_NAME_HEATHROW_EXPRESS_1 = "Heathrow Express ingest";
+	public static final String JOB_NAME_HEATHROW_EXPRESS_2 = "Heathrow Express analysis";
 	public static final String JOB_NAME_MOVING_AVERAGE = "Moving Average";
 	public static final String JOB_NAME_WORD_COUNT= "Word Count";
 	public static final String[] JOB_NAMES = new String[] { 
             JOB_NAME_ACCOUNT,
+            JOB_NAME_HEATHROW_EXPRESS_1,
+            JOB_NAME_HEATHROW_EXPRESS_2,
             JOB_NAME_MOVING_AVERAGE,
             JOB_NAME_WORD_COUNT
     };

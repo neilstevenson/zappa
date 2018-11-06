@@ -66,7 +66,8 @@ public class JobController {
 
         	Map<String, String> datum = new HashMap<>();
 
-    		if (jobName.equals(MyConstants.JOB_NAME_WORD_COUNT)) {
+    		if (jobName.equals(MyConstants.JOB_NAME_WORD_COUNT)
+    				|| jobName.equals(MyConstants.JOB_NAME_HEATHROW_EXPRESS_2)) {
            		datum.put("Start Params", "");
     		} else {
            		datum.put("Start Params", this.bootstrapServers);
@@ -144,7 +145,9 @@ public class JobController {
 
         // Augment params
         if (MyConstants.COMMAND_START.equals(j_verb)) {
-        	if (MyConstants.JOB_NAME_ACCOUNT.equals(j_noun) || MyConstants.JOB_NAME_MOVING_AVERAGE.equals(j_noun) ) {
+        	if (MyConstants.JOB_NAME_ACCOUNT.equals(j_noun)
+        			|| MyConstants.JOB_NAME_HEATHROW_EXPRESS_1.equals(j_noun)
+        			|| MyConstants.JOB_NAME_MOVING_AVERAGE.equals(j_noun) ) {
             	j_params.add(this.bootstrapServers);
         	}
         }

@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * <p>Write all GPS data.
  * </p>
  */
-//TODO Not yet implemented for Jet analysis @Component
+@Component
 @Slf4j
 public class WriterGPS implements CommandLineRunner {
 

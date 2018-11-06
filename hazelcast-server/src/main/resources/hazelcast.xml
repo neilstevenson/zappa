@@ -25,7 +25,7 @@
 
 	<!-- IMap event history from map is made available to Jet -->
 	<event-journal enabled="true">
-		<mapName>gps</mapName>
+		<mapName>position</mapName>
 
 		<!-- Default : 10000 items overall, let's keep 10000 per partition -->
 		<capacity>2710000</capacity>

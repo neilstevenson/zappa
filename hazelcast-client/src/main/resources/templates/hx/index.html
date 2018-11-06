@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head" />
+
+<body>
+	<div th:include="fragments :: header">?</div>
+
+	<div class="mainpane">
+
+		<h1>Heathrow Express- Position &amp; Speed</h1>
+
+		<div th:if="${dataPosition.isEmpty()}">
+        	<h2 style="color: teal;">No results yet</h2>
+        </div>
+
+        <div th:unless="${dataPosition.isEmpty()}">
+
+			<h3>Position</h3>
+            <table class="myData">
+            	<tr>
+            		<th th:each="column : ${columnsPosition}" th:text="${column}" />
+                </tr>
+                <tr th:each="datum : ${dataPosition}">
+                	<td th:text="${datum.get('What')}"/>
+					<td th:text="${datum.get('Timestamp')}"/>
+					<td th:text="${datum.get('When')}"/>
+					<td th:text="${datum.get('Latitude')}"/>
+                    <td th:text="${datum.get('Longitude')}"/>
+                    <td>
+                    	<a th:href="${'https://www.google.com/maps/dir/' 
+                        	+ datum.get('Latitude') 
+                            + ','
+                            + datum.get('Longitude')
+                            }" target="_blank"> 
+                            <span th:text="${datum.get('LatitudeStr') + datum.get('LatitudeStrNS') + ','
+                            	+ datum.get('LongitudeStr') + datum.get('LongitudeStrEW')}">?</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+			<h3>Speed</h3>
+            <table class="myData">
+            	<tr>
+                	<th th:each="column : ${columnsSpeed}" th:text="${column}" />
+                </tr>
+				<tr th:each="datum : ${dataSpeed}">
+                	<td th:each="item : ${datum}" th:text="${item}" />
+                </tr>
+            </table>
+        
+        </div>
+
+	</div>
+
+	<div th:include="fragments :: footer">?</div>
+</body>
+
+</html>
