@@ -17,6 +17,8 @@ import com.hazelcast.map.listener.EntryUpdatedListener;
 
 import lombok.extern.slf4j.Slf4j;
 import neil.demo.zappa.jet.account.Account;
+import neil.demo.zappa.jet.heathrowexpress.HExEgest;
+import neil.demo.zappa.jet.heathrowexpress.HExIngest;
 import neil.demo.zappa.jet.movingaverage.MovingAverageDAG;
 import neil.demo.zappa.jet.wordcount.WordCount;
 
@@ -151,6 +153,17 @@ public class CommandListener implements EntryAddedListener<String, List<String>>
     		} else {
     			log.error("Params null for {}", noun); 
     		}
+    	}
+    	if (noun.equals(MyConstants.JOB_NAME_HEATHROW_EXPRESS_1)) {
+    		if (params!=null) {
+    			Pipeline pipeline = HExIngest.build(params);
+        		dag = pipeline.toDag();
+    		} else {
+    			log.error("Params null for {}", noun); 
+    		}
+    	}
+    	if (noun.equals(MyConstants.JOB_NAME_HEATHROW_EXPRESS_2)) {
+    		dag = HExEgest.build();
     	}
     	if (noun.equals(MyConstants.JOB_NAME_WORD_COUNT)) {
     		Pipeline pipeline = WordCount.build();
