@@ -36,7 +36,7 @@ public class WriterGPS implements CommandLineRunner {
 	 * </p>
 	 */
 	public void run(String... args) throws Exception {
-		String key = "18:48 Departure";
+		String key = "18:28 Departure";
 		int partition = key.hashCode() % MyConstants.KAFKA_PARTITION_COUNT;
 		List<Gps> gpsList = this.loadGps();
 
