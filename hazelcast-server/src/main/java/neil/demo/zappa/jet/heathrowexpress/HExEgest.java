@@ -102,13 +102,17 @@ public class HExEgest {
         						));
         
         // Insufficient data for speed to be calculated
-        Vertex step6 = dag.newVertex("filter",
+        Vertex step6 = dag.newVertex("filter1",
         		Processors.filterP((Map.Entry<String,Double> entry) -> !entry.getValue().isNaN())
 						);
-        
-		Vertex step7 = dag.newVertex("logger", MyPassThroughLogger::new);
+
+        Vertex step7 = dag.newVertex("filter2",
+        		Processors.filterP((Map.Entry<String,Double> entry) -> (entry.getValue() > 0))
+						);
+
+		Vertex step8 = dag.newVertex("logger", MyPassThroughLogger::new);
 		
-		Vertex step8 = dag.newVertex("mapSink", SinkProcessors.writeMapP(MyConstants.IMAP_NAME_SPEED));
+		Vertex step9 = dag.newVertex("mapSink", SinkProcessors.writeMapP(MyConstants.IMAP_NAME_SPEED));
 
 		/* Plumbing, this is an easy chain!
          */
@@ -119,6 +123,7 @@ public class HExEgest {
         dag.edge(Edge.between(step5, step6));
         dag.edge(Edge.between(step6, step7));
         dag.edge(Edge.between(step7, step8));
+        dag.edge(Edge.between(step8, step9));
 
         return dag;
 	}
