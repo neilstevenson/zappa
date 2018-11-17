@@ -81,4 +81,12 @@ public class MyConstants {
     public static final String[] CHART_LINES = { 
                     KEY_CURRENT, KEY_50_POINT, KEY_200_POINT
                     };
+
+	/* -------------------- */
+	/* -- Web page stuff -- */
+	/* -------------------- */
+    public static final String ATTRIBUTE_MAIN_MENU_VISITS = "Main Menu";
+    public static final String ATTRIBUTE_DEBUG_PAGE_VISITS = "Debug Page";
+    public static final String ATTRIBUTE_CLIENT_ADDRESS = "Client Address";
+
 }	

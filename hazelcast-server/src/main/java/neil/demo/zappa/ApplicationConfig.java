@@ -5,11 +5,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.hazelcast.config.ClasspathXmlConfig;
 import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.jet.Jet;
 import com.hazelcast.jet.JetInstance;
 import com.hazelcast.jet.config.JetConfig;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>"<i>temporary code</i>"
@@ -23,14 +26,24 @@ import com.hazelcast.jet.config.JetConfig;
  * </p>
  */
 @Configuration
+@Slf4j
 public class ApplicationConfig {
 
 	@Bean
 	public Config config() {
-		return new ClasspathXmlConfig("hazelcast.xml");
+		Config config = new ClasspathXmlConfig("hazelcast.xml");
+		
+		boolean k8s = System.getProperty("k8s", "false").equalsIgnoreCase("true");
+		log.info("Kubernetes=={}", k8s);
+		
+		if (k8s) {
+			this.adjustForKubernetes(config.getNetworkConfig().getJoin());
+		}
+		
+		return config;
 	}
 	
-    @Bean
+	@Bean
     public JetInstance jetInstance(Config config) {
         JetConfig jetConfig = new JetConfig().setHazelcastConfig(config);
         return Jet.newJetInstance(jetConfig);
@@ -46,5 +59,18 @@ public class ApplicationConfig {
 
         return hazelcastInstance;
     }
+
+    /**
+     * XXX
+     * 
+     * @param joinConfig Part of the main config
+     */
+    private void adjustForKubernetes(JoinConfig joinConfig) {
+    	
+    	log.trace("Turn off TcpIpConfig");
+    	joinConfig.getTcpIpConfig().setEnabled(false);
+
+    	//TODO Add kubes
+	}
 
 }

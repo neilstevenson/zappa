@@ -12,6 +12,8 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.jet.Jet;
 import com.hazelcast.jet.JetInstance;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * <p>"<i>temporary code</i>"
  * </p>
@@ -23,11 +25,17 @@ import com.hazelcast.jet.JetInstance;
  * </p>
  */
 @Configuration
+@Slf4j
 public class ApplicationConfig {
 	
 	@Bean
 	public ClientConfig clientConfig() throws IOException {
-		return new XmlClientConfigBuilder("hazelcast-client.xml").build();
+		ClientConfig clientConfig = new XmlClientConfigBuilder("hazelcast-client.xml").build();
+		
+		boolean k8s = System.getProperty("k8s", "false").equalsIgnoreCase("true");
+		log.info("Kubernetes=={}", k8s);
+
+		return clientConfig;
 	}
 	
 	@Bean

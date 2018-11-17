@@ -44,7 +44,22 @@
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
+
 		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<tag>latest</tag>
+					<buildArgs>
+						<JAR_FILE>${project.artifactId}.jar</JAR_FILE>
+					</buildArgs>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
