@@ -89,4 +89,10 @@ public class MyConstants {
     public static final String ATTRIBUTE_DEBUG_PAGE_VISITS = "Debug Page";
     public static final String ATTRIBUTE_CLIENT_ADDRESS = "Client Address";
 
+	/* ---------------------- */
+	/* -- Kubernetes stuff -- */
+	/* ---------------------- */
+    public static final String KUBERNETES_HAZELCAST_SERVICE_NAME = "service-hazelcast-server";
+    public static final String KUBERNETES_MANCENTER_SERVICE_NAME = "service-hazelcast-management-center";
+  
 }	

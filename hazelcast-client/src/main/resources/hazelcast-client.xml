@@ -7,7 +7,6 @@
 
 	<group>
 		<name>zappa</name>
-		<password>zappa</password>
 	</group>
 
 	<!-- Make client statistics show on the Management Center, off by default -->

@@ -6,7 +6,6 @@
 
 	<group>
 		<name>zappa</name>
-		<password>zappa</password>
 	</group>
 
 	<management-center enabled="true">http://localhost:8080/hazelcast-mancenter</management-center>

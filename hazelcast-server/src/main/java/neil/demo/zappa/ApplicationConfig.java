@@ -5,12 +5,16 @@ import org.springframework.context.annotation.Configuration;
 
 import com.hazelcast.config.ClasspathXmlConfig;
 import com.hazelcast.config.Config;
+import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.jet.Jet;
 import com.hazelcast.jet.JetInstance;
 import com.hazelcast.jet.config.JetConfig;
+import com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategyFactory;
+import com.hazelcast.kubernetes.KubernetesProperties;
+import com.hazelcast.spi.properties.GroupProperty;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +41,7 @@ public class ApplicationConfig {
 		log.info("Kubernetes=={}", k8s);
 		
 		if (k8s) {
-			this.adjustForKubernetes(config.getNetworkConfig().getJoin());
+			this.adjustForKubernetes(config);
 		}
 		
 		return config;
@@ -61,16 +65,35 @@ public class ApplicationConfig {
     }
 
     /**
-     * XXX
+     * <p>Turn off IP based discovery, where we specify cluster
+     * machine IPs, in favour of asking Kubernetes where the
+     * machines are.
+     * </p>
      * 
-     * @param joinConfig Part of the main config
+     * @param Config Config from "{@code hazelcast.xml}" to amend
      */
-    private void adjustForKubernetes(JoinConfig joinConfig) {
+    private void adjustForKubernetes(Config config) {
+    	
+    	JoinConfig joinConfig = config.getNetworkConfig().getJoin();
     	
     	log.trace("Turn off TcpIpConfig");
     	joinConfig.getTcpIpConfig().setEnabled(false);
 
-    	//TODO Add kubes
-	}
+        // Configure Kubernetes discovery
+        HazelcastKubernetesDiscoveryStrategyFactory hazelcastKubernetesDiscoveryStrategyFactory
+            = new HazelcastKubernetesDiscoveryStrategyFactory();
+        DiscoveryStrategyConfig discoveryStrategyConfig =
+                new DiscoveryStrategyConfig(hazelcastKubernetesDiscoveryStrategyFactory);
+        discoveryStrategyConfig.addProperty(KubernetesProperties.SERVICE_DNS.key(),
+                MyConstants.KUBERNETES_HAZELCAST_SERVICE_NAME);
+        
+        // Activate Kubernetes discovery
+        config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED.toString(), "true");
+        joinConfig.getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
+
+        // Where to send to Mancenter, not fatal if it's switched off
+        config.getManagementCenterConfig()
+        	.setEnabled(true).setUrl("http://" + MyConstants.KUBERNETES_MANCENTER_SERVICE_NAME + ":8080/hazelcast-mancenter");
+    }
 
 }
