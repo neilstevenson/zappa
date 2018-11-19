@@ -65,6 +65,13 @@ public class ApplicationConfig {
     }
 
     /**
+     * <p>Modify the configuration loaded from the
+     * "{@code hazelcast.xml}" for Kubernetes. This shows
+     * how configuration can be tweaked as you go from Java.
+     * The client does it the other way, having an XML file
+     * for each kind ; this is more obvious but has a bit of
+     * repetition.
+     * </p> 
      * <p>Turn off IP based discovery, where we specify cluster
      * machine IPs, in favour of asking Kubernetes where the
      * machines are.

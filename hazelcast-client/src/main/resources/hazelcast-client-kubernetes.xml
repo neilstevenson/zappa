@@ -12,13 +12,19 @@
 	<properties>
 		<!-- Make client statistics show on the Management Center, off by default -->
 		<property name="hazelcast.client.statistics.enabled">true</property>
+		<!-- Activate discovery by strategy below rather than explicit IPs -->
+		<property name="hazelcast.discovery.enabled">true</property>
 	</properties>
 
 	<network>
-		<cluster-members>
-			<address>127.0.0.1:5701</address>
-			<address>127.0.0.1:5702</address>
-		</cluster-members>
+        <discovery-strategies>
+        	<discovery-strategy enabled="true"
+                class="com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategy">
+            	<properties>
+                	<property name="service-dns">service-hazelcast-server</property>
+            	</properties>
+            </discovery-strategy>
+    	</discovery-strategies>                 
 	</network>
 
 </hazelcast-client> 

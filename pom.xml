@@ -21,6 +21,8 @@
 		<avro.version>1.8.2</avro.version>
 		<docker.image.prefix>zappa</docker.image.prefix>
 		<dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
+		<!-- So can build when offline -->
+		<dockerfile.build.pullNewerImage>false</dockerfile.build.pullNewerImage>
 		<java.version>1.8</java.version>
 		<jfreechart.version>1.5.0</jfreechart.version>
 		<hazelcast-jet.version>0.7</hazelcast-jet.version>

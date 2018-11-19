@@ -27,15 +27,28 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @Slf4j
 public class ApplicationConfig {
-	
+
+	/**
+	 * <p>Determine the client's config file to use on whether we
+	 * are Kubernetes based or not. Unlike the server's config
+	 * which is modified by Java, to demonstrate an alternative
+	 * approach. Pick one you like.
+	 * </p>
+	 *
+	 * @return
+	 * @throws IOException
+	 */
 	@Bean
 	public ClientConfig clientConfig() throws IOException {
-		ClientConfig clientConfig = new XmlClientConfigBuilder("hazelcast-client.xml").build();
-		
+
 		boolean k8s = System.getProperty("k8s", "false").equalsIgnoreCase("true");
 		log.info("Kubernetes=={}", k8s);
 
-		return clientConfig;
+        if (k8s) {
+        	return new XmlClientConfigBuilder("hazelcast-client-kubernetes.xml").build();
+        } else {
+        	return new XmlClientConfigBuilder("hazelcast-client.xml").build();
+    	}
 	}
 	
 	@Bean

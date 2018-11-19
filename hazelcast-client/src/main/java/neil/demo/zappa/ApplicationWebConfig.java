@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.web.WebFilter;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * <p>Additional configuration so that this JVM is both a
  * Hazelcast client and web-server, and stores the HTTP
@@ -19,6 +21,7 @@ import com.hazelcast.web.WebFilter;
  * </p>
  */
 @Configuration
+@Slf4j
 public class ApplicationWebConfig {
 
 	@Autowired
@@ -37,11 +40,20 @@ public class ApplicationWebConfig {
 	}
 	
 	/**
-	 * <p>For displaying on the account pages
+	 * <p>For displaying on the account pages. Country code
+	 * may be empty string on containers.
 	 * </p>
 	 */
     @Bean
     public String currencySymbol() {
-        return Currency.getInstance(Locale.getDefault()).getSymbol();
+    	try {
+        	Locale locale = Locale.getDefault();
+    		if (locale.getCountry()!=null && locale.getCountry().length() > 0) {
+    			return Currency.getInstance(locale).getSymbol();
+    		}
+    	} catch (Exception e) {
+    		log.error("currencySymbol", e);
+    	}
+		return Currency.getInstance("GBP").getSymbol();
     }
 }
