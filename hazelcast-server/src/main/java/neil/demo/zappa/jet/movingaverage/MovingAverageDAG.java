@@ -1,15 +1,5 @@
 package neil.demo.zappa.jet.movingaverage;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.UUID;
-
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-
 import com.hazelcast.jet.aggregate.AggregateOperation;
 import com.hazelcast.jet.aggregate.AggregateOperation2;
 import com.hazelcast.jet.core.DAG;
@@ -29,12 +19,19 @@ import com.hazelcast.jet.function.DistributedFunction;
 import com.hazelcast.jet.function.DistributedFunctions;
 import com.hazelcast.jet.function.DistributedToLongFunction;
 import com.hazelcast.jet.kafka.KafkaProcessors;
-
-import neil.demo.zappa.jet.movingaverage.TimePriceGrouper;
 import neil.demo.zappa.CurrencyPairKey;
 import neil.demo.zappa.CurrencyPairValue;
 import neil.demo.zappa.MyConstants;
 import neil.demo.zappa.TimePrice;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+import java.util.UUID;
 
 /**
  * <p>Builder class to construct a <I><b>D</b>irected <b>A</b>cyclic <b>G</b>raph</i>.
@@ -309,9 +306,9 @@ public class MovingAverageDAG {
                 ;
 
         // Create three processors for moving averages
-        Vertex averageOf1 = dag.newVertex("Average of 1", new MovingAverageProcessorSupplier(1));
-        Vertex averageOf50 = dag.newVertex("Average of 50", new MovingAverageProcessorSupplier(50));
-        Vertex averageOf200 = dag.newVertex("Average of 200", new MovingAverageProcessorSupplier(200));
+        Vertex averageOf1 = dag.newVertex("Average of 1", () -> new MovingAverageProcessor(1));
+        Vertex averageOf50 = dag.newVertex("Average of 50", () -> new MovingAverageProcessor(50));
+        Vertex averageOf200 = dag.newVertex("Average of 200", () -> new MovingAverageProcessor(200));
 
         // Feed the output from Kafka into the average calculators
         dag.edge(Edge.from(kafka,0).to(averageOf1)

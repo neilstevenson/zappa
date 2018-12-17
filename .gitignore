@@ -5,3 +5,6 @@
 **/*.log
 **/target
 /neil
+/.idea
+*.iml
+*
