@@ -46,7 +46,7 @@ public class WriterAccount1 implements CommandLineRunner {
 			
 			List<AccountBaseline> accountBaselineList = Collections.singletonList(value);
 
-			MyUtils.writeKafka(partition, key, accountBaselineList, this.kafkaAccountProducerTemplate);
+			MyUtils.writeKafka(partition, key, accountBaselineList, this.kafkaAccountProducerTemplate, false);
 		}
 		
 		// Write all the transactions
@@ -77,7 +77,7 @@ public class WriterAccount1 implements CommandLineRunner {
 					// Simulate delay
 					TimeUnit.SECONDS.sleep(1);
 
-					MyUtils.writeKafka(partition, key, accountTransactionList, this.kafkaAccountProducerTemplate);
+					MyUtils.writeKafka(partition, key, accountTransactionList, this.kafkaAccountProducerTemplate, false);
 				}
 			}
 		}

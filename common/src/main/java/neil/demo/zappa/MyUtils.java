@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -34,13 +35,21 @@ public class MyUtils {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected static void writeKafka(int partition, Object key, Collection values,
-			KafkaTemplate kafkaProducerTemplate
+			KafkaTemplate kafkaProducerTemplate, boolean delay
 			) throws Exception {
 		AtomicLong onFailureCount = new AtomicLong(0);
 		AtomicLong onSuccessCount = new AtomicLong(0);
 		CountDownLatch countDownLatch = new CountDownLatch(values.size());
 
 		for (Object value : values) {
+			if (delay) {
+				try {
+					TimeUnit.MILLISECONDS.sleep(50L);
+				} catch (Exception ignored) {
+					;
+				}
+			}
+			
 			ListenableFuture<SendResult<String, String>> sendResult =
 					kafkaProducerTemplate.sendDefault(partition, key.toString(), value.toString());
 

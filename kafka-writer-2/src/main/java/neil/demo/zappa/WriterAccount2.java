@@ -34,7 +34,7 @@ public class WriterAccount2 implements CommandLineRunner {
 			int partition = key.hashCode() % MyConstants.KAFKA_PARTITION_COUNT;
 			List<AccountTransaction> accountTransactionList = transactions.get(key);
 
-			MyUtils.writeKafka(partition, key, accountTransactionList, this.kafkaAccountProducerTemplate);
+			MyUtils.writeKafka(partition, key, accountTransactionList, this.kafkaAccountProducerTemplate, false);
 		}
 	}
 

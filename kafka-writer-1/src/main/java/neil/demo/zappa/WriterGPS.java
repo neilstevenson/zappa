@@ -40,7 +40,7 @@ public class WriterGPS implements CommandLineRunner {
 		int partition = key.hashCode() % MyConstants.KAFKA_PARTITION_COUNT;
 		List<Gps> gpsList = this.loadGps();
 
-		MyUtils.writeKafka(partition, key, gpsList, this.kafkaGpsProducerTemplate);
+		MyUtils.writeKafka(partition, key, gpsList, this.kafkaGpsProducerTemplate, false);
 	}
 
 	/**

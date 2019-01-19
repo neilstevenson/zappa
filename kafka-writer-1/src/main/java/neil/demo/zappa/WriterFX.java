@@ -40,7 +40,7 @@ public class WriterFX implements CommandLineRunner {
 		int partition = key.hashCode() % MyConstants.KAFKA_PARTITION_COUNT;
 		List<String> priceList = this.loadBtcUsd();
 
-		MyUtils.writeKafka(partition, key, priceList, this.kafkaFxProducerTemplate);
+		MyUtils.writeKafka(partition, key, priceList, this.kafkaFxProducerTemplate, true);
 	}
 
 	/**
