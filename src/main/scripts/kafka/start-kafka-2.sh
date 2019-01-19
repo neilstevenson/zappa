@@ -2,8 +2,16 @@
 cd /Applications/kafka_2.11-2.0.0/bin
 
 # Run with "localhost" so Kafka is available when laptop has no network
+MY_HOST=`ipconfig getifaddr en0`
+if [ "${MY_HOST}" == "" ]
+then
+ MY_HOST=localhost
+fi
+echo advertised.host.name=${MY_HOST}
+sleep 3
+
 ./kafka-server-start.sh ../config/server.properties \
-	--override advertised.host.name=localhost \
+	--override advertised.host.name=${MY_HOST} \
 	--override broker.id=2 \
 	--override log.dirs=/tmp/kafka-logs-2 \
 	--override port=9094
