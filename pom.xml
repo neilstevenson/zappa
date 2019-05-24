@@ -20,7 +20,7 @@
 	<properties>
 		<avro.version>1.8.2</avro.version>
 		<docker.image.prefix>zappa</docker.image.prefix>
-		<dockerfile-maven-plugin.version>1.4.3</dockerfile-maven-plugin.version>
+		<dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 		<!-- So can build when offline -->
 		<dockerfile.build.pullNewerImage>false</dockerfile.build.pullNewerImage>
 		<java.version>1.8</java.version>
