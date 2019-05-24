@@ -2,8 +2,7 @@
 bootstrap-servers: 127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094
 
 # This should really be a parameter!^
-# bootstrap-servers: 10.37.211.212:9092,10.37.211.212:9093,10.37.211.212:9094
-# bootstrap-servers: 192.168.4.25:9092,192.168.4.25:9093,192.168.4.25:9094
+# bootstrap-servers: xx.xx.xx.xx:9092,xx.xx.xx.xx:9093,xx.xx.xx.xx:9094
 
 # Leave 8080 for Hazelcast Management Center
 server.port: 0
